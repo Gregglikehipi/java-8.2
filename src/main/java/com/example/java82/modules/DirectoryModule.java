@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class DirectoryModule extends Module {
@@ -36,6 +37,27 @@ public class DirectoryModule extends Module {
     @Override
     public List<String> getOptions() {
         return options;
+    }
+
+    @Override
+    public void run(String path) {
+        for (String o : options) {
+            System.out.println(o);
+        }
+        System.out.println("Print help");
+        System.out.println("Выберите метод");
+        Scanner sc= new Scanner(System.in);
+        int num = sc.nextInt();
+        switch (num) {
+            case 1: directoryList(path);
+                break;
+            case 2: directorySize(path);
+                break;
+            case 3: directoryLastModified(path);
+                break;
+            case 4: super.printHelp();
+                break;
+        }
     }
 
     public void directoryList(String path) {

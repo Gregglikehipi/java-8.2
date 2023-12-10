@@ -8,18 +8,7 @@ public abstract class Module {
     public abstract boolean isSuitableExtension(String extension);
     public abstract List<String> getAllowableExtensions();
     public abstract List<String> getOptions();
-
-    public void run(String path, Collection<String> options) {
-        for (String o : options) {
-            try {
-                this.getClass().getMethod(o, String.class).invoke(this, path);
-            } catch (NoSuchMethodException e) {
-                System.out.printf("Опция %s не существует для модуля %s.", o, this.getClass().getName());
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    public abstract void run(String path);
 
     public void printHelp() {
         System.out.printf("%s:\n------------------%n", getTitle());

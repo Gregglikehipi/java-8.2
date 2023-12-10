@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class ImageModule extends Module {
@@ -44,6 +45,26 @@ public class ImageModule extends Module {
     @Override
     public List<String> getOptions() {
         return options;
+    }
+    @Override
+    public void run(String path) {
+        for (String o : options) {
+            System.out.println(o);
+        }
+        System.out.println("Print help");
+        System.out.println("Выберите метод");
+        Scanner sc= new Scanner(System.in);
+        int num = sc.nextInt();
+        switch (num) {
+            case 1: imageSize(path);
+                break;
+            case 2: imageExif(path);
+                break;
+            case 3: imagePixelColor(path);
+                break;
+            case 4: super.printHelp();
+                break;
+        }
     }
 
     public void imageSize(String path) {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class AudioModule extends Module {
@@ -34,6 +35,27 @@ public class AudioModule extends Module {
     @Override
     public List<String> getOptions() {
         return options;
+    }
+
+    @Override
+    public void run(String path) {
+        for (String o : options) {
+            System.out.println(o);
+        }
+        System.out.println("Print help");
+        System.out.println("Выберите метод");
+        Scanner sc= new Scanner(System.in);
+        int num = sc.nextInt();
+        switch (num) {
+            case 1: audioTrackName(path);
+                break;
+            case 2: audioDuration(path);
+                break;
+            case 3: audioBitrate(path);
+                break;
+            case 4: super.printHelp();
+                break;
+        }
     }
 
     public void executeAudioOperation(String path, String command, String title) {

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,26 @@ public class TextModule extends Module{
     @Override
     public boolean isSuitableExtension(String extension) {
         return allowableExtensions.contains(extension);
+    }
+    @Override
+    public void run(String path) {
+        for (String o : options) {
+            System.out.println(o);
+        }
+        System.out.println("Print help");
+        System.out.println("Выберите метод");
+        Scanner sc= new Scanner(System.in);
+        int num = sc.nextInt();
+        switch (num) {
+            case 1: countString(path);
+                break;
+            case 2: countChar(path);
+                break;
+            case 3: countWords(path);
+                break;
+            case 4: super.printHelp();
+                break;
+        }
     }
 
     public void countString(String path) {
@@ -81,7 +102,7 @@ public class TextModule extends Module{
             int count = 0;
 
             while (str != null) {
-                count += str.split(" +").length;
+                count += str.split(" ").length;
 
                 str = reader.readLine();
             }
